@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "Identity.Api\Identity.Api.csproj", "{6252594F-8B6F-4E41-858E-2DCC4A6A6E04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{30FF8977-F555-49DB-A1BB-8D3936EC0E4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1BB9B770-81B5-4C0F-BB98-B44DC56317D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Api", "Users.Api\Users.Api.csproj", "{6FDD4F67-94AE-402A-8ADF-60DD5C683958}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6252594F-8B6F-4E41-858E-2DCC4A6A6E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6252594F-8B6F-4E41-858E-2DCC4A6A6E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6252594F-8B6F-4E41-858E-2DCC4A6A6E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6252594F-8B6F-4E41-858E-2DCC4A6A6E04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDD4F67-94AE-402A-8ADF-60DD5C683958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDD4F67-94AE-402A-8ADF-60DD5C683958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDD4F67-94AE-402A-8ADF-60DD5C683958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDD4F67-94AE-402A-8ADF-60DD5C683958}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6252594F-8B6F-4E41-858E-2DCC4A6A6E04} = {30FF8977-F555-49DB-A1BB-8D3936EC0E4D}
+		{6FDD4F67-94AE-402A-8ADF-60DD5C683958} = {30FF8977-F555-49DB-A1BB-8D3936EC0E4D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E91CDBD-5668-4511-BA3E-344658D1868F}
+	EndGlobalSection
+EndGlobal
