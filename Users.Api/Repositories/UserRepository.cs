@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.AspNetCore.Connections;
 using Users.Api.Contracts.Data;
 using Users.Api.Database;
 using Users.Api.Domain;
@@ -22,9 +21,14 @@ namespace Users.Api.Repositories
             return result > 0;
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+            var result = await connection.ExecuteAsync(
+                "DELETE FROM Users WHERE Id = @Id",
+                new { Id = id.ToString() });
+
+            return result > 0;
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -46,9 +50,20 @@ namespace Users.Api.Repositories
             return userDto?.ToUser();
         }
 
-        public Task<bool> UpdateAsync(User user)
+        public async Task<bool> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+            var userDto = user.ToUserDto();
+
+            var result = await connection.ExecuteAsync(
+                @"UPDATE Users SET
+                Username = @Username,
+                Password = @Password,
+                Email = @Email,
+                WHERE Id = @Id",
+                userDto);
+
+            return result > 0;
         }
     }
 }
