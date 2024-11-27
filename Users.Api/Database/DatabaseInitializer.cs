@@ -18,8 +18,8 @@ namespace Users.Api.Database
             CREATE TABLE IF NOT EXISTS Users (
                 Id UNIQUEIDENTIFIER PRIMARY KEY,
                 Username NVARCHAR(39) NOT NULL,
-                Email NVARCHAR(256) NOT NULL,
-                Password NVARCHAR(256) NOT NULL
+                Password NVARCHAR(256) NOT NULL,
+                Email NVARCHAR(256) NOT NULL
             )");
         }
     }
