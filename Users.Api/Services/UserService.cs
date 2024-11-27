@@ -14,12 +14,6 @@ namespace Users.Api.Services
             {
                 throw new ValidationException($"A user with id {user.Id.Value} already exists");
             }
-            // Email in Use?
-            var users = await _userRepository.GetAllAsync();
-            if (users.Any(x => x.Email.Equals(user.Email.Value)))
-            {
-                throw new ValidationException($"A user with email {user.Email.Value} already exists");
-            }
 
             return await _userRepository.CreateAsync(user);
         }

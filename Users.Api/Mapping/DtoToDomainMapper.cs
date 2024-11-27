@@ -10,10 +10,10 @@ namespace Users.Api.Mapping
         {
             return new User
             {
-                Id = Id.From(Guid.Parse(userDto.Id)),
+                Id = Id.From(userDto.Id),
                 Username = Username.From(userDto.Username),
-                Email = Email.From(userDto.Email),
                 Password = Password.From(userDto.Password),
+                Email = Email.From(userDto.Email)
             };
         }
     }

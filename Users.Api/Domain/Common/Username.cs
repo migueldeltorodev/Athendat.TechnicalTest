@@ -19,8 +19,8 @@ namespace Users.Api.Domain.Common
                 var message = $"{Value} is not a valid username";
                 throw new ValidationException(message, new[]
                 {
-                new ValidationFailure(nameof(Username), message)
-            });
+                    new ValidationFailure(nameof(Username), message)
+                });
             }
         }
     }

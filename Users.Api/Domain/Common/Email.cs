@@ -9,7 +9,7 @@ namespace Users.Api.Domain.Common
     {
         // Regex para validar emails
         private static readonly Regex EmailRegex =
-            new("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$",
+            new("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,41}$",
                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         protected override void Validate()
