@@ -26,7 +26,7 @@ namespace Users.Api.Repositories
             using var connection = await _connectionFactory.CreateConnectionAsync();
             var result = await connection.ExecuteAsync(
                 "DELETE FROM Users WHERE Id = @Id",
-                new { Id = id.ToString() });
+                new { Id = id });
 
             return result > 0;
         }
@@ -45,7 +45,7 @@ namespace Users.Api.Repositories
             using var connection = await _connectionFactory.CreateConnectionAsync();
             var userDto = await connection.QuerySingleOrDefaultAsync<UserDto>(
                 "SELECT * FROM Users WHERE Id = @Id",
-                new { Id = id.ToString() });
+                new { Id = id });
 
             return userDto?.ToUser();
         }
@@ -59,7 +59,7 @@ namespace Users.Api.Repositories
                 @"UPDATE Users SET
                 Username = @Username,
                 Password = @Password,
-                Email = @Email,
+                Email = @Email
                 WHERE Id = @Id",
                 userDto);
 
