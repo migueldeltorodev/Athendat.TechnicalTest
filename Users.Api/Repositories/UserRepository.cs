@@ -27,9 +27,13 @@ namespace Users.Api.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+            var userDtos = await connection.QueryAsync<UserDto>(
+                "SELECT * FROM Users");
+
+            return userDtos.Select(dto => dto.ToUser());
         }
 
         public async Task<User?> GetAsync(Guid id)
