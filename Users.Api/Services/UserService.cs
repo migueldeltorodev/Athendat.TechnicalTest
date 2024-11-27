@@ -24,9 +24,9 @@ namespace Users.Api.Services
             return await _userRepository.CreateAsync(user);
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _userRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -39,9 +39,16 @@ namespace Users.Api.Services
             return await _userRepository.GetAsync(id);
         }
 
-        public Task<bool> UpdateAsync(User user)
+        public async Task<bool> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            // We check if user exists
+            var existingUser = await _userRepository.GetAsync(user.Id.Value);
+            if (existingUser is not null)
+            {
+                return false;
+            }
+
+            return await _userRepository.UpdateAsync(user);
         }
     }
 }
