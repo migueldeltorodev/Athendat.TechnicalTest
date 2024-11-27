@@ -29,14 +29,14 @@ namespace Users.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _userRepository.GetAllAsync();
         }
 
-        public Task<User?> GetAsync(Guid id)
+        public async Task<User?> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _userRepository.GetAsync(id);
         }
 
         public Task<bool> UpdateAsync(User user)
