@@ -37,7 +37,7 @@ namespace Users.Api.Services
         {
             // We check if user exists
             var existingUser = await _userRepository.GetAsync(user.Id.Value);
-            if (existingUser is not null)
+            if (existingUser is null)
             {
                 return false;
             }
