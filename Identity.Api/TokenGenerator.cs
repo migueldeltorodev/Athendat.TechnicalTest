@@ -22,8 +22,8 @@ namespace Identity.Api
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(60),
-                Issuer = "https://Id.Athendat.com",
-                Audience = "https://Athendat.com",
+                Issuer = "https://id.athendat.com",
+                Audience = "https://athendat.com",
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
