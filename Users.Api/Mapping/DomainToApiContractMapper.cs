@@ -15,5 +15,19 @@ namespace Users.Api.Mapping
                 Email = user.Email.Value
             };
         }
+
+        public static GetAllUsersResponse ToUserResponse(this IEnumerable<User> users)
+        {
+            return new GetAllUsersResponse
+            {
+                Users = users.Select(x => new UserResponse
+                {
+                    Id = x.Id.Value,
+                    Username = x.Username.Value,
+                    Password = x.Password.Value,
+                    Email = x.Email.Value
+                })
+            };
+        }
     }
 }
