@@ -12,12 +12,4 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.MapPost("/login", (LoginRequest request, TokenGenerator tokenGenerator) =>
-{
-    return new
-    {
-        access_token = tokenGenerator.GenerateToken(request.Email)
-    };
-});
-
 app.Run();

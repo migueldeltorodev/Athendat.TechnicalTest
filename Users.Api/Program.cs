@@ -5,6 +5,7 @@ using Users.Api.Repositories;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Users.Api.Services;
+using Identity.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -42,8 +43,13 @@ builder.Services
 builder.Services.AddSingleton<IDbConnectionFactory>(_ =>
   new MSSQLConnectionFactory(
     builder.Configuration.GetValue<string>("Database:ConnectionString")!));
+
+// TokenGenerator Service
+builder.Services.AddSingleton<TokenGenerator>();
+// Other services
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IAuthService, AuthService>();
 
 var app = builder.Build();
 
