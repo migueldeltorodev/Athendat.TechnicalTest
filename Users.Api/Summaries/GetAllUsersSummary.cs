@@ -11,6 +11,8 @@ namespace Users.Api.Summaries
             Summary = "Returns all the users in the system";
             Description = "Returns all the users in the system";
             Response<GetAllUsersResponse>(200, "All users in the system are returned");
+            Response(401, "You need to be authenticated");
+            Response(405, "Method not allowed");
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Users.Api.Summaries
             Description = "Updates an existing user in the system";
             Response<UserResponse>(201, "User was successfully updated");
             Response<ValidationFailureResponse>(400, "The request did not pass validation checks");
+            Response(401, "You need to be authenticated");
+            Response(405, "Method not allowed");
         }
     }
 }
