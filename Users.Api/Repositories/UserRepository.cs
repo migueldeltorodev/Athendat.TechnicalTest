@@ -50,6 +50,16 @@ namespace Users.Api.Repositories
             return userDto?.ToUser();
         }
 
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+            var userDto = await connection.QuerySingleOrDefaultAsync<UserDto>(
+                "SELECT * FROM Users WHERE Email = @Email",
+                new { Email = email });
+
+            return userDto?.ToUser();
+        }
+
         public async Task<bool> UpdateAsync(User user)
         {
             using var connection = await _connectionFactory.CreateConnectionAsync();

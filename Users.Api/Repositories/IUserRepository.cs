@@ -13,5 +13,7 @@ namespace Users.Api.Repositories
         Task<bool> UpdateAsync(User user);
 
         Task<bool> DeleteAsync(Guid id);
+
+        Task<User?> GetByEmailAsync(string email);
     }
 }

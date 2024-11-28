@@ -6,7 +6,7 @@ using Users.Api.Services;
 
 namespace Users.Api.Endpoints
 {
-    public class CreateUserEndpoint(IUserService _userService) : Endpoint<CreateUserRequest, UserResponse>
+    public class RegisterUserEndpoint(IUserService _userService) : Endpoint<CreateUserRequest, UserResponse>
     {
         public override void Configure()
         {
