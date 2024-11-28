@@ -16,7 +16,7 @@ namespace Users.Api.Endpoints
         {
             try
             {
-                var token = await _authService.LoginAsync(req.Email, req.Password);
+                var token = await _authService.LoginAsync(req.Email, req.Password, HttpContext);
                 await SendOkAsync(new { Token = token }, ct);
             }
             catch (UnauthorizedAccessException)

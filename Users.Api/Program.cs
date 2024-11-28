@@ -36,7 +36,11 @@ builder.Configuration["Serilog:WriteTo:1:Args:serverUrl"] = serverUrl;
 
 // Add services to the container.
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "Cookies";
+    options.DefaultChallengeScheme = "Cookies";
+})
     .AddJwtBearer(x =>
     {
         x.TokenValidationParameters = new TokenValidationParameters
@@ -49,6 +53,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = true,
             ValidateAudience = true,
         };
+    })
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login";
+        options.LogoutPath = "/logout";
     });
 
 // FastEndpoints services
