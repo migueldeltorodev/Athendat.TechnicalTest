@@ -10,7 +10,6 @@ namespace Users.Api.Endpoints
         public override void Configure()
         {
             Get("users");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(CancellationToken ct)

@@ -11,7 +11,6 @@ namespace Users.Api.Endpoints
         public override void Configure()
         {
             Put("users/{id:guid}");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(UpdateUserRequest req, CancellationToken ct)

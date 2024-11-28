@@ -8,7 +8,6 @@ namespace Users.Api.Endpoints
         public override void Configure()
         {
             Delete("users/{id:guid}");
-            AllowAnonymous();
         }
 
         public override async Task HandleAsync(CancellationToken ct)
