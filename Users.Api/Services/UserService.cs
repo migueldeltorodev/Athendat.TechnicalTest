@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.SignalR;
 using Users.Api.Domain;
+using Users.Api.Hubs;
 using Users.Api.Repositories;
 
 namespace Users.Api.Services
 {
-    public class UserService(IUserRepository _userRepository) : IUserService
+    public class UserService(IUserRepository _userRepository, IHubContext<NotificationHub> _hubContext) : IUserService
     {
         public async Task<bool> CreateAsync(User user)
         {
@@ -15,12 +17,26 @@ namespace Users.Api.Services
                 throw new ValidationException($"A user with id {user.Id.Value} already exists");
             }
 
-            return await _userRepository.CreateAsync(user);
+            var result = await _userRepository.CreateAsync(user);
+
+            if (result)
+            {
+                // We emmit the registration notification
+                await _hubContext.Clients.All.SendAsync("ReceiveOperationNotification", user.Username.Value, "new user has been registered");
+            }
+
+            return result;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            return await _userRepository.DeleteAsync(id);
+            var result = await _userRepository.DeleteAsync(id);
+            if (result is not false)
+            {
+                // We emmit the delete notification
+                await _hubContext.Clients.All.SendAsync("ReceiveOperationNotification", "deleted a user");
+            }
+            return result;
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -42,7 +58,15 @@ namespace Users.Api.Services
                 return false;
             }
 
-            return await _userRepository.UpdateAsync(user);
+            var result = await _userRepository.UpdateAsync(user);
+
+            if (result)
+            {
+                // Emmit notification of update
+                await _hubContext.Clients.All.SendAsync("ReceiveOperationNotification", user.Username.Value, "updated a user");
+            }
+
+            return result;
         }
     }
 }

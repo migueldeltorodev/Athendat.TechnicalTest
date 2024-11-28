@@ -8,6 +8,7 @@ using Users.Api.Services;
 using Identity.Api;
 using Serilog;
 using DotNetEnv;
+using Users.Api.Hubs;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -74,6 +75,9 @@ builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IAuthService, AuthService>();
 
+// SignalR service
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -81,6 +85,9 @@ app.UseSerilogRequestLogging();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseFastEndpoints();
+
+// Configure SignalR
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.UseOpenApi();
 app.UseSwaggerUi(s => s.ConfigureDefaults());
