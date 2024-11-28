@@ -6,9 +6,32 @@ using FastEndpoints;
 using FastEndpoints.Swagger;
 using Users.Api.Services;
 using Identity.Api;
+using Serilog;
+using DotNetEnv;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+Log.Information("starting server...");
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
-var config = builder.Configuration;
+
+// configurating Serilog
+builder.Host.UseSerilog((context, loggerConfiguration) =>
+{
+    loggerConfiguration.WriteTo.Console();
+    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+});
+
+// getting serilog config
+var logPath = Environment.GetEnvironmentVariable("LOG_FILE_PATH");
+var serverUrl = Environment.GetEnvironmentVariable("SEQ_SERVER_URL");
+
+builder.Configuration["Serilog:WriteTo:0:Args:path"] = logPath;
+builder.Configuration["Serilog:WriteTo:1:Args:serverUrl"] = serverUrl;
 
 // Add services to the container.
 builder.Services.AddAuthorization();
@@ -54,6 +77,7 @@ builder.Services.AddSingleton<IAuthService, AuthService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSerilogRequestLogging();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseFastEndpoints();
@@ -62,8 +86,5 @@ app.UseOpenApi();
 app.UseSwaggerUi(s => s.ConfigureDefaults());
 
 app.UseHttpsRedirection();
-
-//var databaseInitializer = app.Services.GetRequiredService<DatabaseInitializer>();
-//await databaseInitializer.InitializeAsync();
 
 app.Run();
